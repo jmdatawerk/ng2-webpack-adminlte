@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { AppState } from '../app.service';
 import { Title } from './title';
@@ -25,7 +25,7 @@ import { XLarge } from './x-large';
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   templateUrl: './home.template.html'
 })
-export class Home {
+export class Home  implements OnInit, AfterViewInit {
   // Set our default values
   localState = { value: '' };
   // TypeScript public modifiers
@@ -37,7 +37,9 @@ export class Home {
     console.log('hello `Home` component');
     // this.title.getData().subscribe(data => this.data = data);
   }
-
+  ngAfterViewInit(){
+    ($('[data-toggle="tooltip"]') as any).tooltip();
+  }
   submitState(value) {
     console.log('submitState', value);
     this.appState.set('value', value);

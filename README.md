@@ -1,3 +1,113 @@
+### Introduction
+
+I customized the `angular2-webpack-starter` project by adding [Bootstrap](http://getbootstrap.com/) and [Less](http://lesscss.org/) support.
+
+Added the following dependencies:
+
+1. npm install less --save
+2. npm install less-loader --save
+3. npm install css-loader --save
+3. npm install file-loader --save
+3. npm install url-loader --save
+4. npm install bootstrap --save
+5. npm install jquery --save
+
+Added the following configuration to `webpack.common.js`.
+
+```javascript
+{
+  test: /\.less$/,
+  loader: 'style!css!less'
+},
+{
+  test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=application/font-woff"
+}, {
+  test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=application/font-woff"
+}, {
+  test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=application/octet-stream"
+}, {
+  test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "file"
+}, {
+  test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=image/svg+xml"
+}
+```
+
+Add jQuery configuration:
+```javascript
+new webpack.ProvidePlugin({
+  jQuery: 'jquery',
+  $: 'jquery',
+  jquery: 'jquery'
+})
+```
+
+Make sure everything is still working
+
+```bash
+$ npm start
+```
+
+Rename `src/app/app.style.css` to `src/app/app.style.less` containing:
+
+In `app.component.ts`
+
+Due to:
+
+https://github.com/AngularClass/angular2-webpack-starter/issues/165
+
+change
+
+```
+  styleUrls: [
+    './app.style.css'
+  ],
+```
+
+to
+
+```
+  styles: [
+    require('./app.style.less').toString()
+  ],
+```
+
+I encountered an issue with the `to-string-loader`, therefore the explicit calling of `.toString()`.
+
+Change the file-contents to:
+
+```css
+@import "~bootstrap/less/bootstrap.less";
+```
+
+Finally, I made the template HTML more Bootstrap friendly in:
+
+* `app.component.ts`
+* `src/app/home/home.template.html`
+
+Also, wanted to see if the Bootstrap JavaScript components work. In `app.component.ts` I added:
+
+```javascript
+import 'jquery';
+import 'bootstrap/js/tooltip';
+```
+
+And in `home.component.ts` I made the class implement `OnInit` and `AfterViewInit`.
+
+```javascript
+  ngAfterViewInit(){
+    ($('[data-toggle="tooltip"]') as any).tooltip();
+  }
+```
+
+>This is to demonstrate traditional Bootstrap integration. Probably better to use https://github.com/valor-software/ng2-bootstrap
+
+***
+
 [![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
 [![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen) [![GitHub version](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter.svg)](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter) [![Dependency Status](https://david-dm.org/angularclass/angular2-webpack-starter.svg)](https://david-dm.org/angularclass/angular2-webpack-starter)
 [![Issue Stats](http://issuestats.com/github/angularclass/angular2-webpack-starter/badge/pr?style=flat)](http://issuestats.com/github/angularclass/angular2-webpack-starter)
@@ -17,11 +127,11 @@
 [Services](https://gist.github.com/gdi2290/634101fec1671ee12b3e#_follow_@AngularClass_on_twitter),
 [Tests](https://angular.io/docs/js/latest/api/test/), [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-)), [Material](https://github.com/angular/material2), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), [Istanbul](https://github.com/gotwarlost/istanbul), [TypeScript](http://www.typescriptlang.org/), [Typings](https://github.com/typings/typings), [TsLint](http://palantir.github.io/tslint/), [Codelyzer](https://github.com/mgechev/codelyzer), [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html), and [Webpack](http://webpack.github.io/) by [AngularClass](https://angularclass.com).
 
-> If you're looking for Angular 1.x please use [NG6-starter](https://github.com/angularclass/NG6-starter)  
-> If you're looking to learn about Webpack and ES6 Build Tools check out [ES6-build-tools](https://github.com/AngularClass/ES6-build-tools)  
-> If you're looking to learn TypeScript see [TypeStrong/learn-typescript](https://github.com/TypeStrong/learn-typescript)  
-> If you're looking for Webpack 2 version then see the experimental version [angular2-webpack2-starter](https://github.com/gdi2290/angular2-webpack2-starter) that will be merged  
-> If you're looking for something easier to get started with then see the offical angular2-seed that I also maintain [angular/angular2-seed](https://github.com/angular/angular2-seed)  
+> If you're looking for Angular 1.x please use [NG6-starter](https://github.com/angularclass/NG6-starter)
+> If you're looking to learn about Webpack and ES6 Build Tools check out [ES6-build-tools](https://github.com/AngularClass/ES6-build-tools)
+> If you're looking to learn TypeScript see [TypeStrong/learn-typescript](https://github.com/TypeStrong/learn-typescript)
+> If you're looking for Webpack 2 version then see the experimental version [angular2-webpack2-starter](https://github.com/gdi2290/angular2-webpack2-starter) that will be merged
+> If you're looking for something easier to get started with then see the offical angular2-seed that I also maintain [angular/angular2-seed](https://github.com/angular/angular2-seed)
 > If you're looking to add Angular 2 Material Design we have a branch [material2](https://github.com/AngularClass/angular2-webpack-starter/tree/material2)
 
 This seed repo serves as an Angular 2 starter for anyone looking to get up and running with Angular 2 and TypeScript fast. Using a [Webpack](http://webpack.github.io/) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
