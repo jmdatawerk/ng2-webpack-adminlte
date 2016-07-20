@@ -5,12 +5,12 @@ I customized the `angular2-webpack-starter` project by adding [Bootstrap](http:/
 Added the following dependencies:
 
 1. npm install less --save
-2. npm install less-loader --save
-3. npm install css-loader --save
-3. npm install file-loader --save
-3. npm install url-loader --save
-4. npm install bootstrap --save
-5. npm install jquery --save
+2. npm install bootstrap --save
+3. npm install jquery --save
+4. npm install less-loader --save-dev
+5. npm install css-loader --save-dev
+6. npm install file-loader --save-dev
+7. npm install url-loader --save-dev
 
 Added the following configuration to `webpack.common.js`.
 
