@@ -175,6 +175,9 @@ module.exports = {
         exclude: [helpers.root('src/index.html')]
       },
       {
+        test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'
+      },
+      {
         test: /\.less$/,
         loader: 'style!css!less'
       },
