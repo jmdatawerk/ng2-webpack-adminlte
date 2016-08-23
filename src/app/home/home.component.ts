@@ -38,7 +38,9 @@ export class Home  implements OnInit, AfterViewInit {
     // this.title.getData().subscribe(data => this.data = data);
   }
   ngAfterViewInit(){
-    ($('[data-toggle="tooltip"]') as any).tooltip();
+    $.AdminLTE.layout.fix();
+    $.AdminLTE.controlSidebar.activate();    
+
   }
   submitState(value) {
     console.log('submitState', value);

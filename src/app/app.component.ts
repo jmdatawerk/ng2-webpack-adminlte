@@ -26,7 +26,7 @@ import 'bootstrap/js/dropdown';
     require('./app.style.less').toString() 
   ],
   template: `
-<div class="skin-blue">
+<div class="wrapper skin-blue">
 <div class="sidebar-wrapper">
 <div class="main-sidebar">
   <!-- Inner sidebar -->
@@ -82,6 +82,7 @@ import 'bootstrap/js/dropdown';
 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
+<button type="button" class="btn btn-default" data-toggle="control-sidebar">Toggle Right Sidebar</button>
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- Messages: style can be found in dropdown.less-->
@@ -219,7 +220,12 @@ import 'bootstrap/js/dropdown';
           <pre>this.appState.state = {{ appState.state | json }}</pre>
         </div>
       </div>
-    </div><!-- /.container -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Content of the sidebar goes here -->
+</aside>
+<!-- The sidebar's background -->
+<!-- This div must placed right after the sidebar for it to work-->
+<div class="control-sidebar-bg"></div>
 
     <footer class="footer">
       <div class="container text-center">
@@ -227,6 +233,7 @@ import 'bootstrap/js/dropdown';
         WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
       </div>
     </footer>
+    </div><!-- /.container -->
   `
 })
 export class App {
@@ -250,3 +257,4 @@ export class App {
  * For help or questions please contact us at @AngularClass on twitter
  * or our chat on Slack at https://AngularClass.com/slack-join
  */
+
