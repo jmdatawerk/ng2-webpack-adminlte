@@ -14,7 +14,7 @@ import { AppState } from './app.service';
 
 import 'bootstrap/js/tooltip';
 import 'bootstrap/js/dropdown';
-
+import Slider = require('bootstrap-slider/dist/bootstrap-slider');
 /*
  * App Component
  * Top Level Component
@@ -23,7 +23,7 @@ import 'bootstrap/js/dropdown';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styles: [
-    require('./app.style.less').toString() 
+    require('./app.style.less').toString()
   ],
   template: `
 <div class="wrapper skin-blue">
@@ -83,6 +83,7 @@ import 'bootstrap/js/dropdown';
             <span class="sr-only">Toggle navigation</span>
           </a>
 <button type="button" class="btn btn-default" data-toggle="control-sidebar">Toggle Right Sidebar</button>
+<input class="slider"/>
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- Messages: style can be found in dropdown.less-->
@@ -246,7 +247,11 @@ export class App {
   }
 
   ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+    var mySlider = new Slider("input.slider", {
+    min: 1,
+    max: 20,
+    step: 1,
+    value: 14
   }
 }
 
